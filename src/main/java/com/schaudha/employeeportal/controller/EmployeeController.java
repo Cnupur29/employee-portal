@@ -26,7 +26,7 @@ public class EmployeeController {
         return employeeRepository.findById(Long.valueOf(id)).get();
     }
 
-    @PostMapping(value = "/employee")
+    @PostMapping(value = "/employees")
     @ResponseStatus(HttpStatus.OK)
     public void addEmployeeDetails(@RequestBody Employee employee){
         employeeRepository.save(employee);
