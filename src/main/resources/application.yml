@@ -21,3 +21,9 @@ spring:
     properties:
       hibernate:
         enable_lazy_load_no_trans: true
+
+server:
+  port: 8081
+auth0:
+  issuer: https://schaudha.us.auth0.com/
+  apiAudience: http://localhost:8081

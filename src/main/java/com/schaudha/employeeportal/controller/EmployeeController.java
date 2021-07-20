@@ -10,23 +10,23 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/employees")
 public class EmployeeController {
 
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    @GetMapping(value = "/employees")
+    @GetMapping
     public List<Employee> getAllEmployees(){
         return employeeRepository.findAll();
     }
 
-    @GetMapping(value = "/employees/{id}")
+    @GetMapping(value = "/{id}")
     public Employee getEmployeeById(@PathVariable("id") long id ){
         return employeeRepository.findById(Long.valueOf(id)).get();
     }
 
-    @PostMapping(value = "/employees")
+    @PostMapping
     @ResponseStatus(HttpStatus.OK)
     public void addEmployeeDetails(@RequestBody Employee employee){
         employeeRepository.save(employee);
