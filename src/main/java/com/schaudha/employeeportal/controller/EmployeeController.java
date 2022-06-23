@@ -4,9 +4,11 @@ import com.schaudha.employeeportal.model.Employee;
 import com.schaudha.employeeportal.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -22,8 +24,13 @@ public class EmployeeController {
     }
 
     @GetMapping(value = "/employees/{id}")
-    public Employee getEmployeeById(@PathVariable("id") long id ){
-        return employeeRepository.findById(Long.valueOf(id)).get();
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable("id") long id ){
+        Optional<Employee> employee = employeeRepository.findById(Long.valueOf(id));
+        if(!employee.isPresent()) {
+            return ResponseEntity.badRequest()
+                    .body(null);
+        }
+        return ResponseEntity.ok(employee.get());
     }
 
     @PostMapping(value = "/employee")
